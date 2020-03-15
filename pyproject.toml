@@ -20,7 +20,6 @@ keywords = [
   "mappers",
   "ddd",
   "domain driven design",
-  "type-safety",
   "django models",
   "attrs",
   "ORM",

@@ -125,7 +125,6 @@ def test_ini_files_indentation():
         ".flake8",
         ".importlinter",
         ".vale.ini",
-        "mypy.ini",
         "pytest.ini",
         "tox.ini",
     ]:

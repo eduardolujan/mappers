@@ -1,9 +1,0 @@
-from typing import Any
-
-from _mappers.entities import _EntityClass
-from _mappers.entities import _EntityFactory
-from _mappers.entities import _EntityFields
-
-def _is_attrs(entity: Any) -> bool: ...
-def _get_fields(entity: _EntityClass) -> _EntityFields: ...
-def _get_factory(fields: _EntityFields, entity: _EntityClass) -> _EntityFactory: ...

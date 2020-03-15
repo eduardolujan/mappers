@@ -1,3 +1,0 @@
-from typing import Any
-
-def _is_optional(t: Any) -> bool: ...
