@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/dry-python/mappers/compare/1.0.1...1.0.2) (2020-03-21)
+
+### Bug Fixes
+
+- the nullable check can handle a generic foreign key field ([ffcb665](https://github.com/dry-python/mappers/commit/ffcb66510de2e617be674c2c0cd7c04b6ec568eb)), closes [#183](https://github.com/dry-python/mappers/issues/183)
+
 ## [1.0.1](https://github.com/dry-python/mappers/compare/1.0.0...1.0.1) (2020-02-11)
 
 ### Bug Fixes
