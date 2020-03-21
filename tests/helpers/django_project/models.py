@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
@@ -13,6 +15,13 @@ class UserModel(models.Model):
     name = models.CharField(max_length=255)
     about = models.TextField()
     avatar = models.FileField()
+
+    # Validation rules should handle the generic foreign key field as
+    # well.  For example, the nullable check should skip this field,
+    # since it does not have the `null` attribute.
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = GenericForeignKey("content_type", "object_id")
 
 
 class GroupModel(models.Model):

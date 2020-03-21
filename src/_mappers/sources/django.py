@@ -42,11 +42,19 @@ def _get_field_names(field):
 
 
 def _disassemble_field(field):
-    disassembled = {
-        "is_nullable": bool(field.null),
-        "is_link": field.is_relation,
-        "is_collection": field.many_to_many,
-    }
+    is_generic_foreign_key = bool(getattr(field, "get_content_type", None))
+    if is_generic_foreign_key:
+        disassembled = {
+            "is_nullable": False,
+            "is_link": False,
+            "is_collection": False,
+        }
+    else:
+        disassembled = {
+            "is_nullable": bool(field.null),
+            "is_link": field.is_relation,
+            "is_collection": field.many_to_many,
+        }
     if disassembled["is_link"] and not disassembled["is_collection"]:
         disassembled["link"] = field.related_model
         disassembled["link_to"] = _get_fields(

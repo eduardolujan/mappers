@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-INSTALLED_APPS = ["django_project.apps.ProjectConfig"]
+INSTALLED_APPS = ["django.contrib.contenttypes", "django_project.apps.ProjectConfig"]
 
 SECRET_KEY = "*"
 
