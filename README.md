@@ -6,3 +6,9 @@
 ---
 
 Declarative mappers from ORM models to domain entities. And back again!
+
+- [Source Code](https://github.com/dry-python/mappers)
+- [Issue Tracker](https://github.com/dry-python/mappers/issues)
+- [Documentation](https://mappers.readthedocs.io/en/latest/)
+- [Newsletter](https://twitter.com/dry_py)
+- [Discussion](https://gitter.im/dry-python/mappers)
