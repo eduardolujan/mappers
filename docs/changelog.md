@@ -15,3 +15,7 @@
 ### Bug Fixes
 
 - recognize pydantic allow none type as optional entity field ([3260b56](https://github.com/dry-python/mappers/commit/3260b5603e1f009de3cde6c0e3025f72624d078e))
+
+<p align="center">&mdash; ⭐️ &mdash;</p>
+<p align="center"><i>Drylabs maintains dry-python and helps those who want to use it inside their organizations.</i></p>
+<p align="center"><i>Read more at <a href="https://drylabs.io">drylabs.io</a></i></p>
