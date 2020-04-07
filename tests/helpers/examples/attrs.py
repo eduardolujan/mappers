@@ -81,10 +81,6 @@ class Message(object):
     user = attrib(type=User)
     text = attrib(type=str)
 
-    def written_by(self, user):
-        """Check if message was written by given user."""
-        return self.user.primary_key == user.primary_key
-
 
 @attrs
 class FlatMessage(object):

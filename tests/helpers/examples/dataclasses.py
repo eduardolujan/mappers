@@ -79,10 +79,6 @@ class Message:
     user: User
     text: str
 
-    def written_by(self, user: User) -> bool:
-        """Check if message was written by given user."""
-        return self.user.primary_key == user.primary_key
-
 
 @dataclass
 class FlatMessage:
