@@ -8,4 +8,4 @@ from _mappers.factory import mapper_factory as Mapper
 from _mappers.mapper import Evaluated
 
 
-__all__ = ["Evaluated", "Mapper"]
+__all__ = ["Mapper", "Evaluated"]
