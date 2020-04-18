@@ -2,6 +2,9 @@
 
 [![azure-devops-builds](https://img.shields.io/azure-devops/build/dry-python/mappers/1?style=flat-square)](https://dev.azure.com/dry-python/mappers/_build/latest?definitionId=1&branchName=master)
 [![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/dry-python/mappers/1?style=flat-square)](https://dev.azure.com/dry-python/mappers/_build/latest?definitionId=1&branchName=master)
+[![readthedocs](https://img.shields.io/readthedocs/mappers?style=flat-square)](https://mappers.readthedocs.io/en/latest/?badge=latest)
+[![gitter](https://img.shields.io/gitter/room/dry-python/mappers?style=flat-square)](https://gitter.im/dry-python/mappers)
+[![pypi](https://img.shields.io/pypi/v/mappers?style=flat-square)](https://pypi.python.org/pypi/mappers/)
 
 ---
 

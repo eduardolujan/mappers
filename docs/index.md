@@ -1,7 +1,10 @@
 [![logo](https://raw.githubusercontent.com/dry-python/brand/master/logo/mappers.png)](https://github.com/dry-python/mappers)
 
-[![azure-pipeline](https://dev.azure.com/dry-python/mappers/_apis/build/status/dry-python.mappers?branchName=master)](https://dev.azure.com/dry-python/mappers/_build/latest?definitionId=1&branchName=master)
-[![codecov](https://codecov.io/gh/dry-python/mappers/branch/master/graph/badge.svg)](https://codecov.io/gh/dry-python/mappers)
+[![azure-devops-builds](https://img.shields.io/azure-devops/build/dry-python/mappers/1?style=flat-square)](https://dev.azure.com/dry-python/mappers/_build/latest?definitionId=1&branchName=master)
+[![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/dry-python/mappers/1?style=flat-square)](https://dev.azure.com/dry-python/mappers/_build/latest?definitionId=1&branchName=master)
+[![readthedocs](https://img.shields.io/readthedocs/mappers?style=flat-square)](https://mappers.readthedocs.io/en/latest/?badge=latest)
+[![gitter](https://img.shields.io/gitter/room/dry-python/mappers?style=flat-square)](https://gitter.im/dry-python/mappers)
+[![pypi](https://img.shields.io/pypi/v/mappers?style=flat-square)](https://pypi.python.org/pypi/mappers/)
 
 ---
 
