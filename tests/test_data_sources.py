@@ -9,6 +9,29 @@ from mappers import Mapper
 pytestmark = pytest.mark.django_db
 
 
+def test_reader_representation(e, m, r):
+    """Reader representation should show the name of the function."""
+    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+
+    @mapper.reader.entity
+    def foo():
+        pass  # pragma: no cover
+
+    assert repr(foo) == "<Reader::foo>"
+
+    @mapper.reader.optional
+    def bar():
+        pass  # pragma: no cover
+
+    assert repr(bar) == "<Reader::bar>"
+
+    @mapper.reader.sequence
+    def baz():
+        pass  # pragma: no cover
+
+    assert repr(baz) == "<Reader::baz>"
+
+
 # Converters.
 
 

@@ -46,6 +46,9 @@ class _Reader(object):
         self.iterable = iterable
         self.converter = converter
 
+    def __repr__(self):
+        return "<Reader::{name}>".format(name=self.f.__name__)
+
     def __call__(self, *args, **kwargs):
         return self.converter(self.raw(*args, **kwargs))
 
