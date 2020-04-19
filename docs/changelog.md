@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/dry-python/mappers/compare/1.1.0...2.0.0) (2020-04-19)
+
+### Features
+
+- deprecate typing api ([33ce208](https://github.com/dry-python/mappers/commit/33ce20835b6d09481a5405d9e6277c3e81d8cc32))
+
+### BREAKING CHANGES
+
+- See #197
+
 # [1.1.0](https://github.com/dry-python/mappers/compare/1.0.2...1.1.0) (2020-04-19)
 
 ### Features
