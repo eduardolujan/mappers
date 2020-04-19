@@ -7,36 +7,36 @@ import pytest
 
 def _entities():
     try:
-        import examples.dataclasses
+        import entities.dataclasses
 
-        yield examples.dataclasses
+        yield entities.dataclasses
     except (SyntaxError, ImportError):
         pass
 
     try:
-        import examples.attrs_annotated
+        import entities.attrs_annotated
 
-        yield examples.attrs_annotated
+        yield entities.attrs_annotated
     except SyntaxError:
         pass
 
-    import examples.attrs
+    import entities.attrs
 
-    yield examples.attrs
+    yield entities.attrs
 
     try:
-        import examples.pydantic_model
+        import entities.pydantic_model
 
         # The pydantic model returns str type for Optional[str] field
         # for some reason.  Probably a bug in the pydantic library.
-        yield examples.pydantic_model
+        yield entities.pydantic_model
     except (SyntaxError, ImportError):
         pass
 
     try:
-        import examples.pydantic_dataclasses
+        import entities.pydantic_dataclasses
 
-        yield examples.pydantic_dataclasses
+        yield entities.pydantic_dataclasses
     except (SyntaxError, ImportError):
         pass
 

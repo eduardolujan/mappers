@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 from operator import methodcaller
-from typing import List
-from typing import Optional
-
-from _mappers.exceptions import MapperError
 
 
 class Evaluated(object):
@@ -27,18 +23,12 @@ class _Mapper(object):
 
     @property
     def reader(self):
-        return _ReaderGetter(self.iterable, self.entity)
+        return _ReaderGetter(self.iterable)
 
 
 class _ReaderGetter(object):
-    def __init__(self, iterable, entity):
+    def __init__(self, iterable):
         self._iterable = iterable
-        self._entity = entity
-
-    def __call__(self, f):
-        ret = getattr(f, "__annotations__", {}).get("return")
-        converter = _get_converter(ret, self._entity)
-        return _Reader(f, self._iterable, converter)
 
     def entity(self, f):
         return _Reader(f, self._iterable, methodcaller("get"))
@@ -61,14 +51,3 @@ class _Reader(object):
 
     def raw(self, *args, **kwargs):
         return self.iterable(self.f(*args, **kwargs))
-
-
-def _get_converter(ret, entity):
-    if ret is entity:
-        return methodcaller("get")
-    elif ret == List[entity]:
-        return list
-    elif ret == Optional[entity]:
-        return methodcaller("first")
-    else:
-        raise MapperError

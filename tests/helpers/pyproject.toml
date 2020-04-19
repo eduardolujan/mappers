@@ -5,11 +5,10 @@ description = ""
 authors = []
 packages = [
     { include = "django_project" },
-    { include = "examples" },
+    { include = "entities" },
     { include = "helpers.py" },
     { include = "mddoctest.py"},
-    { include = "models.py" },
-    { include = "readers" },
+    { include = "readers.py" },
 ]
 
 [build-system]

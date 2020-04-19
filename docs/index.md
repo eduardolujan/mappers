@@ -55,7 +55,6 @@
 
 ```pycon
 
->>> from typing import List
 >>> from mappers import Mapper
 
 >>> from django_project.models import UserModel

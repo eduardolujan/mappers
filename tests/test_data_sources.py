@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 """Tests related to different data sources."""
-from logging import Logger
-
 import pytest
 
 from mappers import Evaluated
 from mappers import Mapper
-from mappers.exceptions import MapperError
 
 
 pytestmark = pytest.mark.django_db
@@ -94,24 +91,6 @@ def test_result_optional_converter(e, m, r):
     user3 = load_user(3)
 
     assert user3 is None
-
-
-@pytest.mark.parametrize("value", [None, False, Logger])
-def test_result_unknown_converter(e, m, r, value):
-    """Raise error in unclear situation.
-
-    If annotation of the reader will be something unknown, we should
-    raise MapperError.
-    """
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
-
-    expected = ""
-
-    with pytest.raises(MapperError) as exc_info:
-        r.get("invalid_converter", mapper, value)
-
-    message = str(exc_info.value)
-    assert message == expected
 
 
 # Nested mappers.

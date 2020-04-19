@@ -5,10 +5,9 @@ source =
   _mappers
   mappers
   django_project
-  examples
+  entities
   helpers
   mddoctest
-  models
   readers
   tests
 
