@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/dry-python/mappers/compare/2.0.0...2.0.1) (2020-04-19)
+
+### Bug Fixes
+
+- show function name in the reader representation ([96b9b44](https://github.com/dry-python/mappers/commit/96b9b44c87e728c84e8cd14f04892e6767e7ed34)), closes [#123](https://github.com/dry-python/mappers/issues/123)
+
 # [2.0.0](https://github.com/dry-python/mappers/compare/1.1.0...2.0.0) (2020-04-19)
 
 ### Features
