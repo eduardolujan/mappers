@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/dry-python/mappers/compare/1.0.2...1.1.0) (2020-04-19)
+
+### Features
+
+- implement decorators based API ([596ee2f](https://github.com/dry-python/mappers/commit/596ee2f61ffff8fec341bb164bddd7843baefc33)), closes [#197](https://github.com/dry-python/mappers/issues/197)
+
 ## [1.0.2](https://github.com/dry-python/mappers/compare/1.0.1...1.0.2) (2020-03-21)
 
 ### Bug Fixes
