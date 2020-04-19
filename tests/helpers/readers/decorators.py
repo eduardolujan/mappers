@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from typing import List
-from typing import Optional
-
 from django.db.models import Count
 
 from django_project import models
@@ -13,7 +10,7 @@ def get(name, mapper, *args):
 
 
 def _get_load_users(mapper, user):
-    @mapper.reader.of(List[user])
+    @mapper.reader.sequence
     def load_users():
         return models.UserModel.objects.all()
 
@@ -21,7 +18,7 @@ def _get_load_users(mapper, user):
 
 
 def _get_load_user(mapper, user, user_id):
-    @mapper.reader.of(user)
+    @mapper.reader.entity
     def load_user(primary_key):
         return models.UserModel.objects.filter(pk=primary_key)
 
@@ -29,7 +26,7 @@ def _get_load_user(mapper, user, user_id):
 
 
 def _get_load_user_or_none(mapper, user, user_id):
-    @mapper.reader.of(Optional[user])
+    @mapper.reader.optional
     def load_user(primary_key):
         return models.UserModel.objects.filter(pk=primary_key)
 
@@ -37,7 +34,7 @@ def _get_load_user_or_none(mapper, user, user_id):
 
 
 def _get_load_messages(mapper, message):
-    @mapper.reader.of(List[message])
+    @mapper.reader.sequence
     def load_messages():
         return models.MessageModel.objects.all()
 
@@ -45,7 +42,7 @@ def _get_load_messages(mapper, message):
 
 
 def _get_load_total_messages(mapper, message, field_name):
-    @mapper.reader.of(List[message])
+    @mapper.reader.sequence
     def load_messages():
         q = {field_name: Count("user_id")}
         return models.MessageModel.objects.annotate(**q)
@@ -54,7 +51,7 @@ def _get_load_total_messages(mapper, message, field_name):
 
 
 def _get_load_deliveries(mapper, delivery):
-    @mapper.reader.of(List[delivery])
+    @mapper.reader.sequence
     def load_deliveries():
         return models.MessageDeliveryModel.objects.all()
 
@@ -62,7 +59,7 @@ def _get_load_deliveries(mapper, delivery):
 
 
 def _get_load_groups(mapper, group):
-    @mapper.reader.of(List[group])
+    @mapper.reader.sequence
     def load_groups():
         return models.GroupModel.objects.all()
 
@@ -70,6 +67,6 @@ def _get_load_groups(mapper, group):
 
 
 def _get_invalid_converter(mapper, value):
-    @mapper.reader.of(value)
-    def invalid():
-        pass  # pragma: no cover
+    from mappers.exceptions import MapperError
+
+    raise MapperError

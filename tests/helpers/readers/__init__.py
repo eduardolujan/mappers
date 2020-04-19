@@ -13,9 +13,9 @@ def _readers():
     except (SyntaxError, ImportError):
         pass
 
-    import readers.arguments
+    import readers.decorators
 
-    yield readers.arguments
+    yield readers.decorators
 
 
 @pytest.fixture(params=_readers())

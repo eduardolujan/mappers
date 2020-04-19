@@ -62,8 +62,8 @@
 
 >>> mapper = Mapper(User, UserModel, {"primary_key": "id"})
 
->>> @mapper.reader
-... def load_users() -> List[User]:
+>>> @mapper.reader.sequence
+... def load_users():
 ...     """Load all users from the database."""
 ...     return UserModel.objects.all()
 
@@ -145,8 +145,8 @@
 ...     "is_hidden": Evaluated(),
 ... })
 
->>> @mapper.reader
-... def load_chats(user: User) -> List[Chat]:
+>>> @mapper.reader.sequence
+... def load_chats(user: User):
 ...     """Load all chats from the point of view of the logged-in user."""
 ...     subscription = ChatSubscriptionModel.objects.filter(
 ...         user=user.primary_key,
@@ -224,8 +224,8 @@
 ...     }),
 ... })
 
->>> @mapper.reader
-... def load_messages() -> List[Message]:
+>>> @mapper.reader.sequence
+... def load_messages():
 ...     """Load list of all messages."""
 ...     return MessageModel.objects.all()
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import operator
+from operator import methodcaller
 from typing import List
 from typing import Optional
 
@@ -32,25 +32,29 @@ class _Mapper(object):
 
 class _ReaderGetter(object):
     def __init__(self, iterable, entity):
-        self.iterable = iterable
-        self.entity = entity
-        self.ret = None
+        self._iterable = iterable
+        self._entity = entity
 
     def __call__(self, f):
-        if self.ret is None:
-            self.ret = getattr(f, "__annotations__", {}).get("return")
-        return _Reader(f, self.iterable, self.entity, self.ret)
+        ret = getattr(f, "__annotations__", {}).get("return")
+        converter = _get_converter(ret, self._entity)
+        return _Reader(f, self._iterable, converter)
 
-    def of(self, ret):
-        self.ret = ret
-        return self
+    def entity(self, f):
+        return _Reader(f, self._iterable, methodcaller("get"))
+
+    def optional(self, f):
+        return _Reader(f, self._iterable, methodcaller("first"))
+
+    def sequence(self, f):
+        return _Reader(f, self._iterable, list)
 
 
 class _Reader(object):
-    def __init__(self, f, iterable, entity, ret):
+    def __init__(self, f, iterable, converter):
         self.f = f
         self.iterable = iterable
-        self.converter = _get_converter(ret, entity)
+        self.converter = converter
 
     def __call__(self, *args, **kwargs):
         return self.converter(self.raw(*args, **kwargs))
@@ -61,10 +65,10 @@ class _Reader(object):
 
 def _get_converter(ret, entity):
     if ret is entity:
-        return operator.methodcaller("get")
+        return methodcaller("get")
     elif ret == List[entity]:
         return list
     elif ret == Optional[entity]:
-        return operator.methodcaller("first")
+        return methodcaller("first")
     else:
         raise MapperError

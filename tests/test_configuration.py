@@ -309,8 +309,7 @@ def test_yamllint_ignored_patterns_are_ordered():
 # Additional dependencies.
 
 
-@pytest.mark.xfail
-def test_poetry_avoid_additional_dependencies():  # pragma: no cover
+def test_poetry_avoid_additional_dependencies():
     """Python package should not have any of additional dependencies."""
     for pyproject_toml in ["pyproject.toml", "tests/helpers/pyproject.toml"]:
         pyproject_toml = tomlkit.loads(open(pyproject_toml).read())

@@ -39,7 +39,6 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "~2.7 || ^3.5"
-typing = { version = "*", python = "~2.7" }
 
 [build-system]
 requires = ["poetry"]
