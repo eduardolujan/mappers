@@ -156,6 +156,28 @@ def test_nullable_field_optional_attribute(e, m, r):
     assert group2.name == ""
 
 
+def test_nullable_field_unknown_type_attribute(e, m, r):
+    """Skip data source contract check if entity has unknown type.
+
+    We can not enforce any constrain on the field from data soure we do
+    not know what type it should be on the entity.
+    """
+    mapper = Mapper(e.UnknownGroup, m.GroupModel, {"primary_key": "id"})
+
+    load_groups = r.get("load_groups", mapper, e.UnknownGroup)
+
+    result = load_groups()
+
+    assert isinstance(result, list)
+
+    group1, group2 = result
+
+    assert isinstance(group1, e.UnknownGroup)
+    assert isinstance(group2, e.UnknownGroup)
+    assert group1.name is None
+    assert group2.name == ""
+
+
 def test_nested_entities_validation(e, m):
     """Detect if data source relations breaks the contract.
 

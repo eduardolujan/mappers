@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from typing import Any
 from typing import NewType
 from typing import Optional
 
@@ -38,6 +39,14 @@ class OptionalGroup:
 
     primary_key: GroupId
     name: Optional[str]
+
+
+@attrs(auto_attribs=True)
+class UnknownGroup:
+    """Group domain model."""
+
+    primary_key: Any
+    name: Any
 
 
 @attrs(auto_attribs=True)

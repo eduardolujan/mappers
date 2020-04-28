@@ -42,6 +42,14 @@ class OptionalGroup(object):
 
 
 @attrs
+class UnknownGroup(object):
+    """Group domain model."""
+
+    primary_key = attrib()
+    name = attrib()
+
+
+@attrs
 class UserGroup(object):
     """Group domain model."""
 

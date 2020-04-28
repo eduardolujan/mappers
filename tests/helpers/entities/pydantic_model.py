@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from typing import Any
 from typing import NewType
 from typing import Optional
 
@@ -35,6 +36,13 @@ class OptionalGroup(BaseModel):
 
     primary_key: GroupId
     name: Optional[str]
+
+
+class UnknownGroup(BaseModel):
+    """Group domain model."""
+
+    primary_key: Any
+    name: Any
 
 
 class UserGroup(BaseModel):
