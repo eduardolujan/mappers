@@ -1,3 +1,9 @@
+## [2.0.2](https://github.com/dry-python/mappers/compare/2.0.1...2.0.2) (2020-04-28)
+
+### Bug Fixes
+
+- consider Any as an optional type when performing the nullable check ([3087af3](https://github.com/dry-python/mappers/commit/3087af39c43b6690b355b524a482415641e7c88f))
+
 ## [2.0.1](https://github.com/dry-python/mappers/compare/2.0.0...2.0.1) (2020-04-19)
 
 ### Bug Fixes
