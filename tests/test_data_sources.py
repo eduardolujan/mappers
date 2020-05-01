@@ -42,7 +42,7 @@ def test_result_raw_method(e, m, r):
     """
     mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
 
-    load_users = r.get("load_users", mapper, e.User)
+    load_users = r.get("load_users", mapper)
 
     result = load_users.raw()
 
@@ -66,7 +66,7 @@ def test_result_list_converter(e, m, r):
     """
     mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
 
-    load_users = r.get("load_users", mapper, e.User)
+    load_users = r.get("load_users", mapper)
 
     result = load_users()
 
@@ -86,7 +86,7 @@ def test_result_object_converter(e, m, r):
     """
     mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
 
-    load_user = r.get("load_user", mapper, e.User, e.UserId)
+    load_user = r.get("load_user", mapper)
 
     user1 = load_user(1)
 
@@ -105,7 +105,7 @@ def test_result_optional_converter(e, m, r):
     """
     mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
 
-    load_user = r.get("load_user_or_none", mapper, e.User, e.UserId)
+    load_user = r.get("load_user_or_none", mapper)
 
     user1 = load_user(1)
 
@@ -134,7 +134,7 @@ def test_nested_mapper(e, m, r):
         {"primary_key": "id", "user": Mapper({"primary_key": "id"})},
     )
 
-    load_messages = r.get("load_messages", mapper, e.Message)
+    load_messages = r.get("load_messages", mapper)
 
     result = load_messages()
 
@@ -170,7 +170,7 @@ def test_deep_nested_mapper(e, m, r):
         },
     )
 
-    load_deliveries = r.get("load_deliveries", mapper, e.Delivery)
+    load_deliveries = r.get("load_deliveries", mapper)
 
     result = load_deliveries()
 
@@ -201,7 +201,7 @@ def test_related_field(e, m, r):
         {"primary_key": "id", "username": ("user", "name")},
     )
 
-    load_messages = r.get("load_messages", mapper, e.NamedMessage)
+    load_messages = r.get("load_messages", mapper)
 
     result = load_messages()
 
@@ -227,7 +227,7 @@ def test_resolve_id_field_from_foreign_key_without_config(e, m, r):
     """
     mapper = Mapper(e.FlatMessage, m.MessageModel, {"primary_key": "id"})
 
-    load_messages = r.get("load_messages", mapper, e.FlatMessage)
+    load_messages = r.get("load_messages", mapper)
 
     result = load_messages()
 
@@ -255,7 +255,7 @@ def test_evaluated_field(e, m, r):
         e.TotalMessage, m.MessageModel, {"primary_key": "id", "total": Evaluated()}
     )
 
-    load_messages = r.get("load_total_messages", mapper, e.TotalMessage, "total")
+    load_messages = r.get("load_total_messages", mapper, "total")
 
     result = load_messages()
 
@@ -281,7 +281,7 @@ def test_named_evaluated_field(e, m, r):
         {"primary_key": "id", "total": Evaluated("total_number")},
     )
 
-    load_messages = r.get("load_total_messages", mapper, e.TotalMessage, "total_number")
+    load_messages = r.get("load_total_messages", mapper, "total_number")
 
     result = load_messages()
 

@@ -9,7 +9,7 @@ def get(name, mapper, *args):
     return globals()["_get_" + name](mapper, *args)
 
 
-def _get_load_users(mapper, user):
+def _get_load_users(mapper):
     @mapper.reader.sequence
     def load_users():
         return models.UserModel.objects.all()
@@ -17,7 +17,7 @@ def _get_load_users(mapper, user):
     return load_users
 
 
-def _get_load_user(mapper, user, user_id):
+def _get_load_user(mapper):
     @mapper.reader.entity
     def load_user(primary_key):
         return models.UserModel.objects.filter(pk=primary_key)
@@ -25,7 +25,7 @@ def _get_load_user(mapper, user, user_id):
     return load_user
 
 
-def _get_load_user_or_none(mapper, user, user_id):
+def _get_load_user_or_none(mapper):
     @mapper.reader.optional
     def load_user(primary_key):
         return models.UserModel.objects.filter(pk=primary_key)
@@ -33,7 +33,7 @@ def _get_load_user_or_none(mapper, user, user_id):
     return load_user
 
 
-def _get_load_messages(mapper, message):
+def _get_load_messages(mapper):
     @mapper.reader.sequence
     def load_messages():
         return models.MessageModel.objects.all()
@@ -41,7 +41,7 @@ def _get_load_messages(mapper, message):
     return load_messages
 
 
-def _get_load_total_messages(mapper, message, field_name):
+def _get_load_total_messages(mapper, field_name):
     @mapper.reader.sequence
     def load_messages():
         q = {field_name: Count("user_id")}
@@ -50,7 +50,7 @@ def _get_load_total_messages(mapper, message, field_name):
     return load_messages
 
 
-def _get_load_deliveries(mapper, delivery):
+def _get_load_deliveries(mapper):
     @mapper.reader.sequence
     def load_deliveries():
         return models.MessageDeliveryModel.objects.all()
@@ -58,7 +58,7 @@ def _get_load_deliveries(mapper, delivery):
     return load_deliveries
 
 
-def _get_load_groups(mapper, group):
+def _get_load_groups(mapper):
     @mapper.reader.sequence
     def load_groups():
         return models.GroupModel.objects.all()

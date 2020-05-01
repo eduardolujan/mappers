@@ -142,7 +142,7 @@ def test_nullable_field_optional_attribute(e, m, r):
     """
     mapper = Mapper(e.OptionalGroup, m.GroupModel, {"primary_key": "id"})
 
-    load_groups = r.get("load_groups", mapper, e.OptionalGroup)
+    load_groups = r.get("load_groups", mapper)
 
     result = load_groups()
 
@@ -164,7 +164,7 @@ def test_nullable_field_unknown_type_attribute(e, m, r):
     """
     mapper = Mapper(e.UnknownGroup, m.GroupModel, {"primary_key": "id"})
 
-    load_groups = r.get("load_groups", mapper, e.UnknownGroup)
+    load_groups = r.get("load_groups", mapper)
 
     result = load_groups()
 
