@@ -7,7 +7,13 @@ from django.db import models
 iterable_class = models.QuerySet
 
 
-class UserModel(models.Model):
+class ProfileTable(models.Model):
+    """Profile table."""
+
+    login = models.CharField(max_length=255)
+
+
+class UserTable(models.Model):
     """User table."""
 
     created = models.DateTimeField(auto_now_add=True)
@@ -15,6 +21,9 @@ class UserModel(models.Model):
     name = models.CharField(max_length=255)
     about = models.TextField()
     avatar = models.FileField()
+    profile = models.ForeignKey(
+        "ProfileTable", related_name="users", on_delete=models.CASCADE
+    )
 
     # Validation rules should handle the generic foreign key field as
     # well.  For example, the nullable check should skip this field,
@@ -24,45 +33,48 @@ class UserModel(models.Model):
     content_object = GenericForeignKey("content_type", "object_id")
 
 
-class GroupModel(models.Model):
+class GroupTable(models.Model):
     """Group table."""
 
     name = models.CharField(max_length=255, null=True)
 
 
-class ChatModel(models.Model):
+class ChatTable(models.Model):
     """Chat table."""
 
     name = models.CharField(max_length=255)
     subscribers = models.ManyToManyField(
-        "UserModel", related_name="chats", through="ChatSubscriptionModel"
+        "UserTable", related_name="chats", through="SubscriptionTable"
     )
 
 
-class ChatSubscriptionModel(models.Model):
+class SubscriptionTable(models.Model):
     """Chat subscription table."""
 
     user = models.ForeignKey(
-        "UserModel", related_name="chat_subscriptions", on_delete=models.CASCADE
+        "UserTable", related_name="subscriptions", on_delete=models.CASCADE
     )
     chat = models.ForeignKey(
-        "ChatModel", related_name="chat_subscriptions", on_delete=models.CASCADE
+        "ChatTable", related_name="subscriptions", on_delete=models.CASCADE
     )
 
 
-class MessageModel(models.Model):
+class MessageTable(models.Model):
     """Message table."""
 
     user = models.ForeignKey(
-        "UserModel", related_name="messages", on_delete=models.CASCADE
+        "UserTable", related_name="messages", on_delete=models.CASCADE
+    )
+    chat = models.ForeignKey(
+        "ChatTable", related_name="messages", on_delete=models.CASCADE
     )
     text = models.TextField()
 
 
-class MessageDeliveryModel(models.Model):
-    """Message delivery domain model."""
+class DeliveryTable(models.Model):
+    """Message delivery table."""
 
     message = models.ForeignKey(
-        "MessageModel", related_name="deliveries", on_delete=models.CASCADE,
+        "MessageTable", related_name="deliveries", on_delete=models.CASCADE
     )
     service = models.CharField(max_length=100)

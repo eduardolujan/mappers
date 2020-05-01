@@ -9,9 +9,9 @@ from mappers import Mapper
 pytestmark = pytest.mark.django_db
 
 
-def test_reader_representation(e, m, r):
+def test_reader_representation(e, t, r):
     """Reader representation should show the name of the function."""
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+    mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
     @mapper.reader.entity
     def foo():
@@ -35,18 +35,18 @@ def test_reader_representation(e, m, r):
 # Converters.
 
 
-def test_result_raw_method(e, m, r):
+def test_result_raw_method(e, t, r):
     """Provide a way to access underling iterable object.
 
     This code should return a queryset of `User` instances.
     """
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+    mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
     load_users = r.get("load_users", mapper)
 
     result = load_users.raw()
 
-    assert isinstance(result, m.iterable_class)
+    assert isinstance(result, t.iterable_class)
 
     result = iter(result)
     user1 = next(result)
@@ -59,12 +59,12 @@ def test_result_raw_method(e, m, r):
         next(result)
 
 
-def test_result_list_converter(e, m, r):
+def test_result_list_converter(e, t, r):
     """Infer collection converter from the function result annotation.
 
     This code should return a list of `User` instances.
     """
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+    mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
     load_users = r.get("load_users", mapper)
 
@@ -78,13 +78,13 @@ def test_result_list_converter(e, m, r):
     assert isinstance(user2, e.User)
 
 
-def test_result_object_converter(e, m, r):
+def test_result_object_converter(e, t, r):
     """Return a single object.
 
     If instead of converter annotation will be an entity class, we
     should return a single object.  Not a collection.
     """
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+    mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
     load_user = r.get("load_user", mapper)
 
@@ -92,18 +92,18 @@ def test_result_object_converter(e, m, r):
 
     assert isinstance(user1, e.User)
 
-    with pytest.raises(m.UserModel.DoesNotExist):
+    with pytest.raises(t.UserTable.DoesNotExist):
         load_user(3)
 
 
-def test_result_optional_converter(e, m, r):
+def test_result_optional_converter(e, t, r):
     """Return a single object or None.
 
     If annotation of the reader will be an optional entity class, we
     should not raise DoesNotExist error.  Instead of this we will return
     None.
     """
-    mapper = Mapper(e.User, m.UserModel, {"primary_key": "id"})
+    mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
     load_user = r.get("load_user_or_none", mapper)
 
@@ -119,7 +119,7 @@ def test_result_optional_converter(e, m, r):
 # Nested mappers.
 
 
-def test_nested_mapper(e, m, r):
+def test_nested_mapper(e, t, r):
     """Set mapper as a field of another mapper.
 
     Entities could contains nested entities.  Mappers of nested
@@ -130,7 +130,7 @@ def test_nested_mapper(e, m, r):
     """
     mapper = Mapper(
         e.Message,
-        m.MessageModel,
+        t.MessageTable,
         {"primary_key": "id", "user": Mapper({"primary_key": "id"})},
     )
 
@@ -148,7 +148,7 @@ def test_nested_mapper(e, m, r):
     assert isinstance(message2.user, e.User)
 
 
-def test_deep_nested_mapper(e, m, r):
+def test_deep_nested_mapper(e, t, r):
     """Set mapper as a field of another field.
 
     Nested entities could contain nested entities as well.  Mappers of
@@ -161,7 +161,7 @@ def test_deep_nested_mapper(e, m, r):
     """
     mapper = Mapper(
         e.Delivery,
-        m.MessageDeliveryModel,
+        t.DeliveryTable,
         {
             "primary_key": "id",
             "message": Mapper(
@@ -189,7 +189,7 @@ def test_deep_nested_mapper(e, m, r):
 # Related fields.
 
 
-def test_related_field(e, m, r):
+def test_related_field(e, t, r):
     """Set field of the related data source to the entity field.
 
     Mapper could point any field of the entity to any field of any
@@ -197,7 +197,7 @@ def test_related_field(e, m, r):
     """
     mapper = Mapper(
         e.NamedMessage,
-        m.MessageModel,
+        t.MessageTable,
         {"primary_key": "id", "username": ("user", "name")},
     )
 
@@ -215,7 +215,7 @@ def test_related_field(e, m, r):
     assert message2.username == ""
 
 
-def test_resolve_id_field_from_foreign_key_without_config(e, m, r):
+def test_resolve_id_field_from_foreign_key_without_config(e, t, r):
     """Use foreign key as a field.
 
     Original data source model could have foreign key field defined.
@@ -225,7 +225,7 @@ def test_resolve_id_field_from_foreign_key_without_config(e, m, r):
     Code below should work with out config specifics of the `user`
     field.
     """
-    mapper = Mapper(e.FlatMessage, m.MessageModel, {"primary_key": "id"})
+    mapper = Mapper(e.FlatMessage, t.MessageTable, {"primary_key": "id"})
 
     load_messages = r.get("load_messages", mapper)
 
@@ -244,7 +244,7 @@ def test_resolve_id_field_from_foreign_key_without_config(e, m, r):
 # Evaluated fields.
 
 
-def test_evaluated_field(e, m, r):
+def test_evaluated_field(e, t, r):
     """Evaluate fields which are not declared in the data source.
 
     Evaluated marker should be interpreted as a reason to ignore absence
@@ -252,7 +252,7 @@ def test_evaluated_field(e, m, r):
     this name will appears on the collection.
     """
     mapper = Mapper(
-        e.TotalMessage, m.MessageModel, {"primary_key": "id", "total": Evaluated()}
+        e.TotalMessage, t.MessageTable, {"primary_key": "id", "total": Evaluated()}
     )
 
     load_messages = r.get("load_total_messages", mapper, "total")
@@ -269,7 +269,7 @@ def test_evaluated_field(e, m, r):
     assert message2.total == 1
 
 
-def test_named_evaluated_field(e, m, r):
+def test_named_evaluated_field(e, t, r):
     """Use custom name in the data source for the evaluation result.
 
     Evaluated marker could be pointed to the field with a different name
@@ -277,7 +277,7 @@ def test_named_evaluated_field(e, m, r):
     """
     mapper = Mapper(
         e.TotalMessage,
-        m.MessageModel,
+        t.MessageTable,
         {"primary_key": "id", "total": Evaluated("total_number")},
     )
 

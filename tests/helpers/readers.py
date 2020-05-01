@@ -11,7 +11,7 @@ def _sources():
     import django_project.repositories
 
     class Django:
-        models = django_project.models
+        tables = django_project.models
         repositories = django_project.repositories
 
         @staticmethod
@@ -22,10 +22,10 @@ def _sources():
 
 
 @pytest.fixture(params=_sources())
-def m(request):
+def t(request):
     """Parametrized fixture with all possible data sources."""
     request.param.setup()
-    return request.param.models
+    return request.param.tables
 
 
 @pytest.fixture(params=_sources())

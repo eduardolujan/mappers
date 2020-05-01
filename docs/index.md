@@ -39,7 +39,7 @@
 
 >>> from django.db import models
 
->>> class UserModel(models.Model):
+>>> class UserTable(models.Model):
 ...     created = models.DateTimeField(auto_now_add=True)
 ...     modified = models.DateTimeField(auto_now=True)
 ...     name = models.CharField(max_length=255)
@@ -57,14 +57,14 @@
 
 >>> from mappers import Mapper
 
->>> from django_project.models import UserModel
+>>> from django_project.models import UserTable
 
->>> mapper = Mapper(User, UserModel, {"primary_key": "id"})
+>>> mapper = Mapper(User, UserTable, {"primary_key": "id"})
 
 >>> @mapper.reader.sequence
 ... def load_users():
 ...     """Load all users from the database."""
-...     return UserModel.objects.all()
+...     return UserTable.objects.all()
 
 ```
 
@@ -73,7 +73,7 @@
 ```pycon
 
 >>> load_users()  # doctest: +ELLIPSIS
-[User(primary_key=..., created=datetime.datetime(...), modified=datetime.datetime(...), name='', about='', avatar=''), ...]
+[User(primary_key=1, created=datetime.datetime(...), modified=datetime.datetime(...), name='', about='', avatar=''), ...]
 
 ```
 
@@ -102,25 +102,25 @@
 
 >>> from django.db import models
 
->>> class ChatModel(models.Model):
+>>> class ChatTable(models.Model):
 ...     name = models.CharField(max_length=255)
 ...     subscribers = models.ManyToManyField(
-...         "UserModel",
+...         "UserTable",
 ...         related_name="chats",
-...         through="ChatSubscriptionModel",
+...         through="SubscriptionTable",
 ...     )
 ...
 ...     class Meta:
 ...         app_label = "app"
 
->>> class ChatSubscriptionModel(models.Model):
+>>> class SubscriptionTable(models.Model):
 ...     user = models.ForeignKey(
-...         "UserModel",
+...         "UserTable",
 ...         related_name="chat_subscriptions",
 ...         on_delete=models.CASCADE,
 ...     )
 ...     chat = models.ForeignKey(
-...         "ChatModel",
+...         "ChatTable",
 ...         related_name="chat_subscriptions",
 ...         on_delete=models.CASCADE,
 ...     )
@@ -137,9 +137,9 @@
 >>> from django.db import models
 >>> from mappers import Mapper, Evaluated
 
->>> from django_project.models import ChatModel, ChatSubscriptionModel
+>>> from django_project.models import ChatTable, SubscriptionTable
 
->>> mapper = Mapper(Chat, ChatModel, {
+>>> mapper = Mapper(Chat, ChatTable, {
 ...     "primary_key": "id",
 ...     "is_hidden": Evaluated(),
 ... })
@@ -147,11 +147,11 @@
 >>> @mapper.reader.sequence
 ... def load_chats(user: User):
 ...     """Load all chats from the point of view of the logged-in user."""
-...     subscription = ChatSubscriptionModel.objects.filter(
+...     subscription = SubscriptionTable.objects.filter(
 ...         user=user.primary_key,
 ...         chat=models.OuterRef("pk")
 ...     )
-...     chats = ChatModel.objects.annotate(
+...     chats = ChatTable.objects.annotate(
 ...         is_hidden=~models.Exists(subscription),
 ...     )
 ...     return chats
@@ -163,7 +163,7 @@
 ```pycon
 
 >>> load_chats(load_users()[0])  # doctest: +ELLIPSIS
-[Chat(primary_key=..., name='', is_hidden=True), ...]
+[Chat(primary_key=1, name='', is_hidden=False), ...]
 
 ```
 
@@ -195,9 +195,9 @@
 
 >>> from django.db import models
 
->>> class MessageModel(models.Model):
+>>> class MessageTable(models.Model):
 ...     user = models.ForeignKey(
-...         "UserModel",
+...         "UserTable",
 ...         related_name="messages",
 ...         on_delete=models.CASCADE,
 ...     )
@@ -214,9 +214,9 @@
 
 >>> from mappers import Mapper
 
->>> from django_project.models import MessageModel
+>>> from django_project.models import MessageTable
 
->>> mapper = Mapper(Message, MessageModel, {
+>>> mapper = Mapper(Message, MessageTable, {
 ...     "primary_key": "id",
 ...     "user": Mapper({
 ...         "primary_key": "id",
@@ -226,7 +226,7 @@
 >>> @mapper.reader.sequence
 ... def load_messages():
 ...     """Load list of all messages."""
-...     return MessageModel.objects.all()
+...     return MessageTable.objects.all()
 
 ```
 
@@ -237,7 +237,7 @@
 >>> messages = load_messages()
 
 >>> messages  # doctest: +ELLIPSIS
-[Message(primary_key=..., user=User(primary_key=...), text=''), ...]
+[Message(primary_key=1, user=User(primary_key=1, ...), text=''), ...]
 
 >>> messages[0].written_by(load_users()[0])
 True
