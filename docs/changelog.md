@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/dry-python/mappers/compare/2.0.2...2.0.3) (2020-05-01)
+
+### Bug Fixes
+
+- support one to one relations in django models ([7bd4cfc](https://github.com/dry-python/mappers/commit/7bd4cfc2a886942b2e500704baae534f6dc5a673)), closes [#154](https://github.com/dry-python/mappers/issues/154)
+- use flat structure to represent data source schema ([980f41f](https://github.com/dry-python/mappers/commit/980f41f8386d888d2725b799929d4548afad111c)), closes [#222](https://github.com/dry-python/mappers/issues/222) [#185](https://github.com/dry-python/mappers/issues/185)
+
 ## [2.0.2](https://github.com/dry-python/mappers/compare/2.0.1...2.0.2) (2020-04-28)
 
 ### Bug Fixes
