@@ -12,8 +12,10 @@ from django.core import management
 def _setup():
     environ.setdefault("DJANGO_SETTINGS_MODULE", "django_project.settings")
     apps.populate(settings.INSTALLED_APPS)
-    management.call_command("migrate")
-    management.call_command("loaddata", "examples.yaml")
+    management.call_command("migrate", "--run-syncdb")
+    from django_project.fixtures import setup
+
+    setup()
 
 
 def _main():

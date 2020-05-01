@@ -6,7 +6,7 @@ import pytest
 
 
 def _sources():
-    import django.core.management
+    import django_project.fixtures
     import django_project.models
     import django_project.repositories
 
@@ -16,7 +16,7 @@ def _sources():
 
         @staticmethod
         def setup():
-            django.core.management.call_command("loaddata", "examples.yaml")
+            django_project.fixtures.setup()
 
     yield Django
 
