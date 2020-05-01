@@ -228,7 +228,8 @@ def test_nested_entities_type_validation(e, t, value):
     assert message == expected
 
 
-def test_related_field_validation(e, t):
+@pytest.mark.parametrize("value", [("text", "name"), ("user", "avatar", "login")])
+def test_related_field_validation(e, t, value):
     """Detect invalid config definition.
 
     If the mapper defines a related field, a corresponding data source
@@ -237,11 +238,7 @@ def test_related_field_validation(e, t):
     expected = ""
 
     with pytest.raises(MapperError) as exc_info:
-        Mapper(
-            e.NamedMessage,
-            t.MessageTable,
-            {"primary_key": "id", "username": ("text", "name")},
-        )
+        Mapper(e.NamedMessage, t.MessageTable, {"primary_key": "id", "username": value})
 
     message = str(exc_info.value)
     assert message == expected

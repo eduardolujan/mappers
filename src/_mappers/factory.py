@@ -50,7 +50,7 @@ arguments = {
 
 def _configure(entity, data_source, config):
     fields, entity_factory = _entity_factory(entity)
-    data_source_fields, data_source_factory = _data_source_factory(data_source)
-    mapping = _validate(dict(fields), data_source_fields, config, data_source)
+    data_source_schema, data_source_factory = _data_source_factory(data_source)
+    mapping = _validate(dict(fields), data_source_schema, config, data_source)
     iterable = data_source_factory(fields, entity_factory, mapping)
     return iterable

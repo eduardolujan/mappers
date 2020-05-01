@@ -4,7 +4,8 @@ from _mappers.mapper import _LazyMapper
 from _mappers.mapper import Evaluated
 
 
-def _validate(entity_fields, data_source_fields, config, data_source):
+def _validate(entity_fields, data_source_schema, config, data_source):
+    data_source_fields = data_source_schema[data_source]
     _config_types(config)
     _unknown_entity_fields_in_config(entity_fields, config)
     _unknown_data_source_fields_in_config(data_source_fields, config)
@@ -12,7 +13,7 @@ def _validate(entity_fields, data_source_fields, config, data_source):
     _required_entity_fields(entity_fields, data_source_fields)
     _nested_entity_data_source_fields(entity_fields, data_source_fields)
     _nested_entity_config_fields(entity_fields, config)
-    _related_config_fields(data_source_fields, config)
+    _related_config_fields(data_source_schema, data_source_fields, config)
     return _get_mapping(entity_fields, data_source_fields, config)
 
 
@@ -90,16 +91,16 @@ def _nested_entity_config_fields(entity_fields, config):
             raise MapperError
 
 
-def _related_config_fields(data_source_fields, config):
-    link_to = data_source_fields
+def _related_config_fields(data_source_schema, data_source_fields, config):
     for value in config.values():
         if isinstance(value, tuple):
+            fields = data_source_fields
             for related in value[:-1]:
-                _related_field_link(link_to[related])
-                link_to = link_to[related]["link_to"]
+                _related_link_field(fields[related])
+                fields = data_source_schema[fields[related]["link_to"]]
 
 
-def _related_field_link(value):
+def _related_link_field(value):
     if not value["is_link"]:
         raise MapperError
     if value["is_collection"]:
@@ -114,7 +115,7 @@ def _get_mapping(entity_fields, data_source_fields, config):
         if field_type["is_entity"]:
             mapping[field] = mapper_factory(
                 field_type["type"],
-                data_source_fields[field]["link"],
+                data_source_fields[field]["link_to"],
                 config.get(field, mapper_factory()).config,
             )
         else:
