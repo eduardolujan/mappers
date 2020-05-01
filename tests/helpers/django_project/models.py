@@ -21,9 +21,7 @@ class UserTable(models.Model):
     name = models.CharField(max_length=255)
     about = models.TextField()
     avatar = models.FileField()
-    profile = models.ForeignKey(
-        "ProfileTable", related_name="users", on_delete=models.CASCADE
-    )
+    profile = models.OneToOneField("ProfileTable", on_delete=models.CASCADE)
 
     # Validation rules should handle the generic foreign key field as
     # well.  For example, the nullable check should skip this field,

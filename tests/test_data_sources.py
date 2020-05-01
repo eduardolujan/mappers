@@ -189,16 +189,15 @@ def test_deep_nested_mapper(e, t, r):
 # Related fields.
 
 
-def test_related_field(e, t, r):
+@pytest.mark.parametrize("value", [("user", "name"), ("user", "profile", "login")])
+def test_related_field(e, t, r, value):
     """Set field of the related data source to the entity field.
 
     Mapper could point any field of the entity to any field of any
     related model of the mapped data source.
     """
     mapper = Mapper(
-        e.NamedMessage,
-        t.MessageTable,
-        {"primary_key": "id", "username": ("user", "name")},
+        e.NamedMessage, t.MessageTable, {"primary_key": "id", "username": value}
     )
 
     load_messages = r.get("load_messages", mapper)
