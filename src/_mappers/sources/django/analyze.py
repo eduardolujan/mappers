@@ -7,14 +7,14 @@ try:
     from django.db.models import Model as DjangoModel
 
     IS_AVAILABLE = True
-except ImportError:  # pragma: no cover
+except ImportError:
     IS_AVAILABLE = False
 
 
 def _is_django_model(data_source):
-    if IS_AVAILABLE:  # pragma: no branch
+    if IS_AVAILABLE:
         return inspect.isclass(data_source) and issubclass(data_source, DjangoModel)
-    else:  # pragma: no cover
+    else:
         return False
 
 

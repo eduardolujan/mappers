@@ -9,7 +9,7 @@ from _mappers.mapper import Evaluated
 
 try:
     from django.db.models.query import ValuesListIterable
-except ImportError:  # pragma: no cover
+except ImportError:
     pass
 
 
