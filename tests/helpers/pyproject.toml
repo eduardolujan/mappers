@@ -9,6 +9,7 @@ packages = [
     { include = "helpers.py" },
     { include = "mddoctest.py"},
     { include = "readers.py" },
+    { include = "sqlalchemy_project" },
 ]
 
 [build-system]

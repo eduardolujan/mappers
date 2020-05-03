@@ -9,6 +9,7 @@ source =
   helpers
   mddoctest
   readers
+  sqlalchemy_project
   tests
 
 [paths]
@@ -32,4 +33,9 @@ source =
   .tox/py36-django30/lib/python3.6/site-packages
   .tox/py37-django30/lib/python3.7/site-packages
   .tox/py38-django30/lib/python3.8/site-packages
+  .tox/py27-sqlalchemy/lib/python2.7/site-packages
+  .tox/py35-sqlalchemy/lib/python3.5/site-packages
+  .tox/py36-sqlalchemy/lib/python3.6/site-packages
+  .tox/py37-sqlalchemy/lib/python3.7/site-packages
+  .tox/py38-sqlalchemy/lib/python3.8/site-packages
   .tox/doctest/lib/python3.8/site-packages
