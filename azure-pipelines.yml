@@ -92,7 +92,6 @@ jobs:
   - job: "Deploy"
     dependsOn:
       - "Test"
-      - "Review"
     condition: |
       and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     steps:
