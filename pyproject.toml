@@ -6,27 +6,14 @@ description = "Declarative mappers from ORM models to domain entities. And back 
 readme = "README.md"
 license = "BSD-2-Clause"
 
-homepage = "https://dry-python.org/"
-repository = "https://github.com/dry-python/mappers/"
-documentation = "https://mappers.readthedocs.io/"
+repository = "https://github.com/proofit404/mappers/"
 
 authors = [
     "Artem Malyshev <proofit404@gmail.com>",
-    "Nikita Sobolev <mail@sobolevn.me>",
-]
-
-keywords = [
-  "dry-python",
-  "mappers",
-  "ddd",
-  "domain driven design",
-  "django models",
-  "attrs",
-  "ORM",
 ]
 
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
     "Topic :: Software Development",
