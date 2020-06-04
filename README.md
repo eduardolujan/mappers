@@ -6,5 +6,7 @@
 
 Declarative mappers from ORM models to domain entities. And back again!
 
+**[Documentation](https://proofit404.github.io/mappers/)**
+
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The mappers library is part of the SOLID python family.</i></p>
