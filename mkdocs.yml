@@ -1,9 +1,7 @@
 ---
 strict: true
 site_name: mappers
-site_description: |
-  Declarative mappers from ORM models to domain entities. And back
-  again!
+site_description: Declarative mappers to domain entities.
 theme:
   name: material
   palette:
@@ -32,4 +30,6 @@ extra_javascript:
 nav:
   - Home:
       - Home: index.md
+      - Installation: installation.md
+      - Usage: usage.md
       - Changelog: changelog.md

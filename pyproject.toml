@@ -2,16 +2,15 @@
 name = "mappers"
 version = "2.0.3"
 
-description = "Declarative mappers from ORM models to domain entities. And back again!"
-readme = "README.md"
+description = "Declarative mappers to domain entities."
+readme = "docs/index.md"
 license = "BSD-2-Clause"
 
+homepage = "https://pypi.org/project/mappers/"
 repository = "https://github.com/proofit404/mappers/"
 documentation = "https://proofit404.github.io/mappers/"
 
-authors = [
-    "Artem Malyshev <proofit404@gmail.com>",
-]
+authors = ["Artem Malyshev <proofit404@gmail.com>"]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
