@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+from operator import methodcaller
+
+from _mappers.mapper import _Converter
 from _mappers.mapper import _Mapper
 from _mappers.mapper import Evaluated
 
@@ -21,6 +24,12 @@ def _factory(fields, entity_factory, mapping):
 
 
 class _ValuesList(object):
+    converters = {
+        _Converter.entity: methodcaller("get"),
+        _Converter.optional: methodcaller("first"),
+        _Converter.sequence: list,
+    }
+
     def __init__(self, fields, entity_factory, mapping, arguments, iterable_class):
         self.fields = fields
         self.entity_factory = entity_factory

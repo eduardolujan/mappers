@@ -56,6 +56,11 @@ class SubscriptionTable(models.Model):
         "ChatTable", related_name="subscriptions", on_delete=models.CASCADE
     )
 
+    class Meta(object):
+        """Table settings."""
+
+        unique_together = ("user", "chat")
+
 
 class MessageTable(models.Model):
     """Message table."""

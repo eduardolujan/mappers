@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from operator import methodcaller
 
 
 class Evaluated(object):
@@ -26,31 +25,38 @@ class _Mapper(object):
         return _ReaderGetter(self.iterable)
 
 
+class _Converter(object):
+    entity = object()
+    optional = object()
+    sequence = object()
+
+
 class _ReaderGetter(object):
     def __init__(self, iterable):
         self._iterable = iterable
 
     def entity(self, f):
-        return _Reader(f, self._iterable, methodcaller("get"))
+        return _Reader(f, self._iterable, _Converter.entity)
 
     def optional(self, f):
-        return _Reader(f, self._iterable, methodcaller("first"))
+        return _Reader(f, self._iterable, _Converter.optional)
 
     def sequence(self, f):
-        return _Reader(f, self._iterable, list)
+        return _Reader(f, self._iterable, _Converter.sequence)
 
 
 class _Reader(object):
     def __init__(self, f, iterable, converter):
-        self.f = f
-        self.iterable = iterable
-        self.converter = converter
+        self._f = f
+        self._iterable = iterable
+        self._converter = converter
 
     def __repr__(self):
-        return "<Reader::{name}>".format(name=self.f.__name__)
+        return "<Reader::{name}>".format(name=self._f.__name__)
 
     def __call__(self, *args, **kwargs):
-        return self.converter(self.raw(*args, **kwargs))
+        converter = self._iterable.converters[self._converter]
+        return converter(self.raw(*args, **kwargs))
 
     def raw(self, *args, **kwargs):
-        return self.iterable(self.f(*args, **kwargs))
+        return self._iterable(self._f(*args, **kwargs))

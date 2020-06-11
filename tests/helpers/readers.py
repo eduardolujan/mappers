@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 import pytest
 
+import helpers
+
 
 # Fixtures.
 
 
+@helpers.is_not_empty
 def _sources():
     import django_project.fixtures
     import django_project.models

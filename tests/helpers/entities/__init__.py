@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 import pytest
 
+import helpers
+
 
 # Fixtures.
 
 
+@helpers.is_not_empty
 def _entities():
     try:
         import entities.dataclasses

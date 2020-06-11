@@ -12,7 +12,7 @@ def mapper_factory(entity=None, data_source=None, config=None):
     entity, data_source, config = _decompose(entity, data_source, config)
     if not isinstance(config, dict):
         raise MapperError
-    if entity and data_source:
+    if entity is not None and data_source is not None:
         iterable = _configure(entity, data_source, config)
         return _Mapper(entity, data_source, config, iterable)
     else:
@@ -20,7 +20,7 @@ def mapper_factory(entity=None, data_source=None, config=None):
 
 
 def _decompose(*args):
-    args = tuple(filter(None, args))
+    args = tuple(filter(lambda arg: arg is not None, args))
     return arguments[len(args)](*args)
 
 

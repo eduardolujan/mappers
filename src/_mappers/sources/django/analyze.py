@@ -33,7 +33,6 @@ def _get_fields(data_source, schema):
             _get_fields(disassembled["link_to"], schema)
         for name in names:
             fields[name] = disassembled
-    return fields
 
 
 def _get_field_names(field):
