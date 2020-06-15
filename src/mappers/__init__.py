@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Declarative mappers from ORM models to domain entities.
-
-:copyright: (c) 2019-2020 Artem Malyshev.
-:license: BSD, see LICENSE for more details.
-"""
+"""Declarative mappers from ORM models to domain entities."""
 from _mappers.factory import mapper_factory as Mapper
 from _mappers.mapper import Evaluated
 

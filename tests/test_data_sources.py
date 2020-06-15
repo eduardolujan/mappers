@@ -39,6 +39,7 @@ def test_result_raw_method(e, t, r):
     """Provide a way to access underling iterable object.
 
     This code should return a queryset of `User` instances.
+
     """
     mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
@@ -63,6 +64,7 @@ def test_result_list_converter(e, t, r):
     """Infer collection converter from the function result annotation.
 
     This code should return a list of `User` instances.
+
     """
     mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
@@ -81,8 +83,9 @@ def test_result_list_converter(e, t, r):
 def test_result_object_converter(e, t, r):
     """Return a single object.
 
-    If instead of converter annotation will be an entity class, we
-    should return a single object.  Not a collection.
+    If instead of converter annotation will be an entity class, we should return a
+    single object.  Not a collection.
+
     """
     mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
@@ -99,9 +102,9 @@ def test_result_object_converter(e, t, r):
 def test_result_optional_converter(e, t, r):
     """Return a single object or None.
 
-    If annotation of the reader will be an optional entity class, we
-    should not raise DoesNotExist error.  Instead of this we will return
-    None.
+    If annotation of the reader will be an optional entity class, we should not raise
+    DoesNotExist error.  Instead of this we will return None.
+
     """
     mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
@@ -127,6 +130,7 @@ def test_nested_mapper(e, t, r):
 
     This code should return a list of `Message` instances.  Each
     `Message` instance should have `User` instance as its attribute.
+
     """
     mapper = Mapper(
         e.Message,
@@ -158,6 +162,7 @@ def test_deep_nested_mapper(e, t, r):
     `Delivery` instance should have `Message` instance as its
     attribute.  Each `Message` instance should have `User` as its
     attribute.
+
     """
     mapper = Mapper(
         e.Delivery,
@@ -193,8 +198,9 @@ def test_deep_nested_mapper(e, t, r):
 def test_related_field(e, t, r, value):
     """Set field of the related data source to the entity field.
 
-    Mapper could point any field of the entity to any field of any
-    related model of the mapped data source.
+    Mapper could point any field of the entity to any field of any related model of the
+    mapped data source.
+
     """
     mapper = Mapper(
         e.NamedMessage, t.MessageTable, {"primary_key": "id", "username": value}
@@ -223,6 +229,7 @@ def test_resolve_id_field_from_foreign_key_without_config(e, t, r):
 
     Code below should work with out config specifics of the `user`
     field.
+
     """
     mapper = Mapper(e.FlatMessage, t.MessageTable, {"primary_key": "id"})
 
@@ -246,9 +253,10 @@ def test_resolve_id_field_from_foreign_key_without_config(e, t, r):
 def test_evaluated_field(e, t, r):
     """Evaluate fields which are not declared in the data source.
 
-    Evaluated marker should be interpreted as a reason to ignore absence
-    of the field directly on the data source model.  Field with exactly
-    this name will appears on the collection.
+    Evaluated marker should be interpreted as a reason to ignore absence of the field
+    directly on the data source model.  Field with exactly this name will appears on the
+    collection.
+
     """
     mapper = Mapper(
         e.TotalMessage, t.MessageTable, {"primary_key": "id", "total": Evaluated()}
@@ -271,8 +279,9 @@ def test_evaluated_field(e, t, r):
 def test_named_evaluated_field(e, t, r):
     """Use custom name in the data source for the evaluation result.
 
-    Evaluated marker could be pointed to the field with a different name
-    than the target attribute.
+    Evaluated marker could be pointed to the field with a different name than the target
+    attribute.
+
     """
     mapper = Mapper(
         e.TotalMessage,

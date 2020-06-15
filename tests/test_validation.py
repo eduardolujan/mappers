@@ -77,8 +77,9 @@ def test_config_value_type_validation(e, t):
 def test_data_source_field_missing(e, t):
     """Detect if data source field set is not complete.
 
-    Raise exception if data source missed some fields required by
-    entity.  And there is no configuration related to the field.
+    Raise exception if data source missed some fields required by entity.  And there is
+    no configuration related to the field.
+
     """
     expected = ("Can not find 'primary_key' field in the %s model") % (t.UserTable,)
 
@@ -92,8 +93,8 @@ def test_data_source_field_missing(e, t):
 def test_unknown_entity_fields(e, t):
     """Config keys should correspond to the entity fields only.
 
-    There is no possibility to have random keys in the config not
-    related to the entity.
+    There is no possibility to have random keys in the config not related to the entity.
+
     """
     expected = ""
 
@@ -107,8 +108,9 @@ def test_unknown_entity_fields(e, t):
 def test_unknown_data_source_fields(e, t):
     """Config values should correspond to the data source fields only.
 
-    There is no possibility to point to the random strings not related
-    to the data source.
+    There is no possibility to point to the random strings not related to the data
+    source.
+
     """
     expected = ""
 
@@ -122,8 +124,9 @@ def test_unknown_data_source_fields(e, t):
 def test_nullable_field_validation(e, t):
     """Detect if data source field breaks the contract.
 
-    Data source cannot have nullable field if corresponding entity
-    attribute is not annotated with Optional type.
+    Data source cannot have nullable field if corresponding entity attribute is not
+    annotated with Optional type.
+
     """
     expected = ""
 
@@ -137,8 +140,9 @@ def test_nullable_field_validation(e, t):
 def test_nullable_field_optional_attribute(e, t, r):
     """Detect if data source field follows the contract.
 
-    Data source can have nullable field if corresponding entity
-    attribute annotated with Optional type.
+    Data source can have nullable field if corresponding entity attribute annotated with
+    Optional type.
+
     """
     mapper = Mapper(e.OptionalGroup, t.GroupTable, {"primary_key": "id"})
 
@@ -159,8 +163,9 @@ def test_nullable_field_optional_attribute(e, t, r):
 def test_nullable_field_unknown_type_attribute(e, t, r):
     """Skip data source contract check if entity has unknown type.
 
-    We can not enforce any constrain on the field from data soure we do
-    not know what type it should be on the entity.
+    We can not enforce any constrain on the field from data soure we do not know what
+    type it should be on the entity.
+
     """
     mapper = Mapper(e.UnknownGroup, t.GroupTable, {"primary_key": "id"})
 
@@ -181,8 +186,9 @@ def test_nullable_field_unknown_type_attribute(e, t, r):
 def test_nested_entities_validation(e, t):
     """Detect if data source relations breaks the contract.
 
-    If entity have a nested entity as its field, a corresponding data
-    source field should be a relation object.
+    If entity have a nested entity as its field, a corresponding data source field
+    should be a relation object.
+
     """
     expected = ""
 
@@ -196,8 +202,9 @@ def test_nested_entities_validation(e, t):
 def test_nested_entities_kind_validation(e, t):
     """Detect if data source relations breaks the contract.
 
-    If entity have a nested entity as its field, the corresponding data
-    source field should resolve to only one object.
+    If entity have a nested entity as its field, the corresponding data source field
+    should resolve to only one object.
+
     """
     expected = ""
 
@@ -216,8 +223,9 @@ def test_nested_entities_kind_validation(e, t):
 def test_nested_entities_type_validation(e, t, value):
     """Detect invalid config definition.
 
-    If entity have a nested entity as its field, the mapper cannot have
-    config definition of that field which is not a Mapper.
+    If entity have a nested entity as its field, the mapper cannot have config
+    definition of that field which is not a Mapper.
+
     """
     expected = ""
 
@@ -232,8 +240,9 @@ def test_nested_entities_type_validation(e, t, value):
 def test_related_field_validation(e, t, value):
     """Detect invalid config definition.
 
-    If the mapper defines a related field, a corresponding data source
-    field should be a relation object.
+    If the mapper defines a related field, a corresponding data source field should be a
+    relation object.
+
     """
     expected = ""
 
@@ -247,8 +256,9 @@ def test_related_field_validation(e, t, value):
 def test_related_field_kind_validation(e, t):
     """Detect invalid config definition.
 
-    If mapper defines related field, the corresponding data source field
-    should resolve to only one object.
+    If mapper defines related field, the corresponding data source field should resolve
+    to only one object.
+
     """
     expected = ""
 
@@ -266,9 +276,9 @@ def test_related_field_kind_validation(e, t):
 def test_related_field_length_validation(e, t):
     """Detect invalid config definition.
 
-    Related field could not have place in the same data source as its
-    entity.  Therefore, related field definition could not have length
-    of one.
+    Related field could not have place in the same data source as its entity. Therefore,
+    related field definition could not have length of one.
+
     """
     expected = ""
 
@@ -286,8 +296,9 @@ def test_related_field_length_validation(e, t):
 def test_related_field_type_validation(e, t):
     """Detect invalid config definition.
 
-    Related field definition in the mapper config should be a tuple of
-    strings.  We can not have arbitrary objects in the field definition.
+    Related field definition in the mapper config should be a tuple of strings.  We can
+    not have arbitrary objects in the field definition.
+
     """
     expected = ""
 
