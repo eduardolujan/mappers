@@ -4,4 +4,5 @@ from sqlalchemy_project.tables import metadata
 
 
 def setup():
+    """Load data."""
     metadata.create_all(engine)
