@@ -28,6 +28,7 @@ class _ValuesList(object):
         _Converter.entity: methodcaller("get"),
         _Converter.optional: methodcaller("first"),
         _Converter.sequence: list,
+        _Converter.iterable: iter,
     }
 
     def __init__(self, fields, entity_factory, mapping, arguments, iterable_class):

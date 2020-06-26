@@ -9,6 +9,14 @@ def get(name, mapper, *args):
     return globals()["_get_" + name](mapper, *args)
 
 
+def _get_iterate_users(mapper):
+    @mapper.reader.iterable
+    def iterate_users():
+        return models.UserTable.objects.all()
+
+    return iterate_users
+
+
 def _get_load_users(mapper):
     @mapper.reader.sequence
     def load_users():

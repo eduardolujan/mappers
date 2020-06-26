@@ -4,9 +4,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
-iterable_class = models.QuerySet
-
-
 class ProfileTable(models.Model):
     """Profile table."""
 

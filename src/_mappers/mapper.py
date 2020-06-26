@@ -29,6 +29,7 @@ class _Converter(object):
     entity = object()
     optional = object()
     sequence = object()
+    iterable = object()
 
 
 class _ReaderGetter(object):
@@ -44,19 +45,18 @@ class _ReaderGetter(object):
     def sequence(self, f):
         return _Reader(f, self._iterable, _Converter.sequence)
 
+    def iterable(self, f):
+        return _Reader(f, self._iterable, _Converter.iterable)
+
 
 class _Reader(object):
     def __init__(self, f, iterable, converter):
         self._f = f
         self._iterable = iterable
-        self._converter = converter
+        self._converter = iterable.converters[converter]
 
     def __repr__(self):
         return "<Reader::{name}>".format(name=self._f.__name__)
 
     def __call__(self, *args, **kwargs):
-        converter = self._iterable.converters[self._converter]
-        return converter(self.raw(*args, **kwargs))
-
-    def raw(self, *args, **kwargs):
-        return self._iterable(self._f(*args, **kwargs))
+        return self._converter(self._iterable(self._f(*args, **kwargs)))

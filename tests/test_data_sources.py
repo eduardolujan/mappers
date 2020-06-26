@@ -31,25 +31,26 @@ def test_reader_representation(e, t, r):
 
     assert repr(baz) == "<Reader::baz>"
 
+    @mapper.reader.iterable
+    def quiz():
+        pass  # pragma: no cover
+
+    assert repr(quiz) == "<Reader::quiz>"
+
 
 # Converters.
 
 
-def test_result_raw_method(e, t, r):
-    """Provide a way to access underling iterable object.
-
-    This code should return a queryset of `User` instances.
-
-    """
+def test_result_iterable_converter(e, t, r):
+    """Return iterator of entities."""
     mapper = Mapper(e.User, t.UserTable, {"primary_key": "id"})
 
-    load_users = r.get("load_users", mapper)
+    iterate_users = r.get("iterate_users", mapper)
 
-    result = load_users.raw()
+    result = iterate_users()
 
-    assert isinstance(result, t.iterable_class)
+    assert isinstance(result, type(iter([])))
 
-    result = iter(result)
     user1 = next(result)
     user2 = next(result)
 
