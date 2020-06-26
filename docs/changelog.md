@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/proofit404/mappers/compare/2.0.3...2.1.0) (2020-06-26)
+
+
+### Features
+
+* introduce iterable reader ([ac359b1](https://github.com/proofit404/mappers/commit/ac359b1e3d369a0685c06fe454f598f5f6f44ef5))
+
 ## [2.0.3](https://github.com/proofit404/mappers/compare/2.0.2...2.0.3) (2020-05-01)
 
 ### Bug Fixes
