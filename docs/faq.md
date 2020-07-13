@@ -2,7 +2,9 @@
 
 ## I want to reuse a reader inside another reader
 
-Use private functions for it. It's the best option available. It's not necessary to copypaste filter logic from one reader to another just to build something slitely different on top of it.
+Use private functions for it. It's the best option available. It's not necessary
+to copypaste filter logic from one reader to another just to build something
+slitely different on top of it.
 
 ```python
 

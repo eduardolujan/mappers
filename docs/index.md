@@ -6,7 +6,9 @@
 
 Declarative mappers to domain entities.
 
-**[Documentation](https://proofit404.github.io/mappers/) | [Source Code](https://github.com/proofit404/mappers) | [Task Tracker](https://github.com/proofit404/mappers/issues)**
+**[Documentation](https://proofit404.github.io/mappers/) |
+[Source Code](https://github.com/proofit404/mappers) |
+[Task Tracker](https://github.com/proofit404/mappers/issues)**
 
 ## Pros
 
@@ -19,7 +21,10 @@ Declarative mappers to domain entities.
 
 ## Questions
 
-If you have any questions, feel free to create an issue in our [Task Tracker](https://github.com/proofit404/mappers/issues). We have the [question label](https://github.com/proofit404/mappers/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion) exactly for this purpose.
+If you have any questions, feel free to create an issue in our
+[Task Tracker](https://github.com/proofit404/mappers/issues). We have the
+[question label](https://github.com/proofit404/mappers/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion)
+exactly for this purpose.
 
 ## License
 
